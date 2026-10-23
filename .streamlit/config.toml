@@ -4,6 +4,9 @@ backgroundColor = "#ffffff"
 secondaryBackgroundColor = "#f0f2f6"
 textColor = "#262730"
 
+[client]
+toolbarMode = "minimal"
+
 [server]
 headless = true
 # This dashboard runs from OneDrive. Avoid scanning imported source files after
