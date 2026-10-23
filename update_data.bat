@@ -11,7 +11,7 @@ echo  3G OILS Dashboard - Data Update
 echo ===================================================
 echo.
 
-:: Step 1: Export CSVs from .mdb
+:: Step 1: Export CSVs from .mdb and sync local database cache
 echo [1/3] Exporting CSVs from 3G2026.mdb ...
 python scripts\export_mdb.py
 if %errorlevel% neq 0 (
@@ -23,6 +23,9 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 echo Export complete.
+
+echo Updating local SQLite cache ...
+python scripts\sync_databases.py
 echo.
 
 :: Step 2: Stage the updated CSV files
