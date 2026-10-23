@@ -326,4 +326,222 @@ with database_sync.read_snapshot():
         df = fbd(DS.purchases(), sd, ed)
         g = df[df["supplier_gstno"].notna() & (df["supplier_gstno"] != "") & (df["supplier_gstno"] != "nan")]
         if g.empty: st.info("No GST-registered purchases found."); return
-        r = g.groupby(["supplier_gstno", "supplier_name"]).agg(Bi
+        r = g.groupby(["supplier_gstno", "supplier_name"]).agg(Bills=("Doc_Id", "nunique"), Taxable=("taxable_value", "sum"), CGST=("CGSTAMT", "sum"), SGST=("SGSTAMT", "sum"), IGST=("IGSTAMT", "sum")).reset_index().sort_values("Taxable", ascending=False)
+        r["Tax"] = r["CGST"] + r["SGST"] + r["IGST"]
+        st.dataframe(r.rename(columns={"supplier_gstno": "GSTIN", "supplier_name": "Supplier"}), width="stretch", hide_index=True, height=500,
+                     column_config={c: CC_AMT0 for c in ["Taxable", "CGST", "SGST", "IGST", "Tax"]})
+
+
+    # ═══════════════════════ SUMMARY ════════════════════════════════════════════
+    def page_summary_stock():
+        hdr("\U0001F4CB Closing Stock"); sd, ed, fx = dfr("ss", extra=1)
+        st.caption("Opening balance is before From; movements cover the selected dates. Balance uses the latest annual stock snapshot available as of To, in each item’s sale unit.")
+        stk = DS.closing_stock(ed, sd)
+        grp = fx[0].multiselect("Group", sorted(stk["GRP_NAME"].dropna().unique()), key="ss_g")
+        d = stk if not grp else stk[stk["GRP_NAME"].isin(grp)]
+        c1, c2, c3 = st.columns(3)
+        c1.metric("In Stock", f"{(d['closing_qty'] > 0).sum()}"); c2.metric("Out/Zero", f"{(d['closing_qty'] <= 0).sum()}"); c3.metric("Total", f"{len(d)}")
+        st.dataframe(d[["ITEM_NAME", "GRP_NAME", "Sale_PACK", "opening_qty", "total_inward", "total_outward", "closing_qty"]].rename(
+            columns={"ITEM_NAME": "Item", "GRP_NAME": "Group", "Sale_PACK": "Unit", "opening_qty": "Opening", "total_inward": "In", "total_outward": "Out", "closing_qty": "Balance"}),
+            width="stretch", hide_index=True, height=600, column_config={"Opening": CC_QTY, "In": CC_QTY, "Out": CC_QTY, "Balance": CC_QTY})
+
+
+    def page_summary_sales():
+        hdr("\U0001F4CB Sales Summary"); sd, ed, _ = dfr("ssu")
+        df = fbd(DS.sales(), sd, ed)
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Invoices", f"{df['Doc_Id'].nunique():,}"); c2.metric("Qty", f"{df['BILL_QTY'].sum():,.0f}")
+        c3.metric("Sales (incl. GST)", f"{INR}{df['BL_NETVAL'].sum():,.0f}"); c4.metric("Tax", f"{INR}{df['total_gst'].sum():,.0f}")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.dataframe(pd.DataFrame({"Component": ["CGST", "SGST", "IGST"], "Amount": [df["CGSTAMT"].sum(), df["SGSTAMT"].sum(), df["IGSTAMT"].sum()]}), hide_index=True, column_config={"Amount": CC_AMT0})
+        with col2:
+            mm = {0: "Cash", 1: "Credit"}; ms = df.groupby("Mode").agg(Bills=("Doc_Id", "nunique"), Amount=("BL_NETVAL", "sum")).reset_index(); ms["Pay"] = ms["Mode"].map(mm).fillna(ms["Mode"].map(lambda mode: f"Other (mode {mode})"))
+            st.dataframe(ms[["Pay", "Bills", "Amount"]], hide_index=True, width="stretch", column_config={"Amount": CC_AMT0})
+            st.caption("Additional payment modes retain their source code until their meaning is confirmed in the billing system.")
+        m = df.groupby("month").agg(Bills=("Doc_Id", "nunique"), Qty=("BILL_QTY", "sum"), Taxable=("taxable_value", "sum"), CGST=("CGSTAMT", "sum"), SGST=("SGSTAMT", "sum"), IGST=("IGSTAMT", "sum"), Other_Tax=("other_tax", "sum"), Total=("BL_NETVAL", "sum")).reset_index()
+        st.dataframe(m, width="stretch", hide_index=True, column_config={c: CC_AMT0 for c in ["Taxable", "CGST", "SGST", "IGST", "Other_Tax", "Total"]} | {"Qty": CC_QTY})
+
+
+    def page_summary_purchase():
+        hdr("\U0001F4CB Purchase Summary"); sd, ed, _ = dfr("spu")
+        df = fbd(DS.purchases(), sd, ed)
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Bills", f"{df['Doc_Id'].nunique():,}"); c2.metric("Qty", f"{df['BILL_QTY'].sum():,.0f}")
+        c3.metric("Taxable", f"{INR}{df['taxable_value'].sum():,.0f}"); c4.metric("Tax", f"{INR}{df['total_gst'].sum():,.0f}")
+        m = df.groupby("month").agg(Bills=("Doc_Id", "nunique"), Qty=("BILL_QTY", "sum"), Taxable=("taxable_value", "sum"), CGST=("CGSTAMT", "sum"), SGST=("SGSTAMT", "sum"), IGST=("IGSTAMT", "sum"), Other_Tax=("other_tax", "sum"), Total=("BL_NETVAL", "sum")).reset_index()
+        st.dataframe(m, width="stretch", hide_index=True, column_config={c: CC_AMT0 for c in ["Taxable", "CGST", "SGST", "IGST", "Other_Tax", "Total"]} | {"Qty": CC_QTY})
+
+
+    def page_summary_gst():
+        hdr("\U0001F4CB GST Summary"); sd, ed, _ = dfr("sgst")
+        s = fbd(DS.sales(), sd, ed); p = fbd(DS.purchases(), sd, ed)
+        oc, os_, oi = s["CGSTAMT"].sum(), s["SGSTAMT"].sum(), s["IGSTAMT"].sum()
+        ic, is_, ii = p["CGSTAMT"].sum(), p["SGSTAMT"].sum(), p["IGSTAMT"].sum()
+        for lbl, cg, sg, ig in [("Output Tax (Sales)", oc, os_, oi), ("Input Tax (Purchases)", ic, is_, ii)]:
+            st.markdown(f"**{lbl}**"); c1, c2, c3, c4 = st.columns(4)
+            c1.metric("CGST", f"{INR}{cg:,.0f}"); c2.metric("SGST", f"{INR}{sg:,.0f}"); c3.metric("IGST", f"{INR}{ig:,.0f}"); c4.metric("Total", f"{INR}{cg+sg+ig:,.0f}")
+        st.caption("Goods invoices only. Services, credit/debit notes and tax-credit adjustments are excluded. This difference is not a GST return calculation.")
+        nc, ns, ni = oc - ic, os_ - is_, oi - ii
+        st.markdown("**Recorded GST Difference**"); c1, c2, c3, c4 = st.columns(4)
+        c1.metric("CGST", f"{INR}{nc:,.0f}"); c2.metric("SGST", f"{INR}{ns:,.0f}"); c3.metric("IGST", f"{INR}{ni:,.0f}"); c4.metric("Difference", f"{INR}{nc+ns+ni:,.0f}")
+        sm = s.groupby("month").agg(Out_CGST=("CGSTAMT", "sum"), Out_SGST=("SGSTAMT", "sum"), Out_IGST=("IGSTAMT", "sum")).reset_index()
+        pm = p.groupby("month").agg(In_CGST=("CGSTAMT", "sum"), In_SGST=("SGSTAMT", "sum"), In_IGST=("IGSTAMT", "sum")).reset_index()
+        gm = sm.merge(pm, on="month", how="outer").fillna(0); gm["Net"] = gm["Out_CGST"] - gm["In_CGST"] + gm["Out_SGST"] - gm["In_SGST"] + gm["Out_IGST"] - gm["In_IGST"]
+        st.dataframe(gm, width="stretch", hide_index=True, column_config={c: CC_AMT0 for c in gm.columns if c != "month"})
+
+
+    def page_summary_financial():
+        hdr("\U0001F4CB Financial Summary"); sd, ed, fx = dfr("sf", extra=1)
+        db = DS.daybook(); db_f = db[(db["dk"] >= _dk(sd)) & (db["dk"] <= _dk(ed))]
+        db_f = db_f.assign(Debit=db_f["AMOUNT"].where(db_f["TYPE"].isin(["D", "P"]), 0),
+                           Credit=db_f["AMOUNT"].where(db_f["TYPE"].isin(["C", "R"]), 0))
+        tb = db_f.groupby(["Act_ID", "Act_Name", "Act_Type", "Act_MG"], dropna=False)[["Debit", "Credit"]].sum().reset_index()
+        st.caption("Recorded ledger movements for the selected dates. Cash contra entries and account opening balances are not reconstructed; these figures are not a complete trial balance or profit-and-loss statement.")
+        tb["Net"] = tb["Debit"] - tb["Credit"]; tb = tb[(tb["Debit"].abs() + tb["Credit"].abs()) > 0].sort_values("Net", ascending=False)
+        af = fx[0].multiselect("Acct Type", sorted(tb["Act_Type"].dropna().unique()), key="sf_a")
+        td = tb if not af else tb[tb["Act_Type"].isin(af)]
+        st.dataframe(td[["Act_Name", "Act_Type", "Debit", "Credit", "Net"]], width="stretch", hide_index=True, height=350,
+                     column_config={"Debit": CC_AMT0, "Credit": CC_AMT0, "Net": CC_AMT0})
+        c1, c2 = st.columns(2)
+        with c1:
+            tb = td
+            ti = tb[tb["Act_MG"] == "I"]["Credit"].sum() - tb[tb["Act_MG"] == "I"]["Debit"].sum()
+            te = tb[tb["Act_MG"] == "E"]["Debit"].sum() - tb[tb["Act_MG"] == "E"]["Credit"].sum()
+            st.metric("Trading Income", f"{INR}{ti:,.0f}"); st.metric("Expenses", f"{INR}{te:,.0f}"); st.metric("Recorded Income less Expenses", f"{INR}{ti-te:,.0f}")
+        with c2:
+            cu = tb[tb["Act_Type"] == "Customer"].copy(); cu["O"] = cu["Debit"] - cu["Credit"]
+            su = tb[tb["Act_Type"] == "Supplier"].copy(); su["O"] = su["Credit"] - su["Debit"]
+            st.metric("Customer Net Debits (period)", f"{INR}{cu[cu['O']>0]['O'].sum():,.0f}"); st.metric("Supplier Net Credits (period)", f"{INR}{su[su['O']>0]['O'].sum():,.0f}")
+
+
+    # ═══════════════════════ ANALYTICS ══════════════════════════════════════════
+    def page_analytics_stock():
+        import plotly.express as px
+        import plotly.graph_objects as go
+        hdr("\U0001F4C8 Stock Analytics"); sd, ed, fx = dfr("as", extra=1)
+        movements = fbd(DS.stock_movements(), sd, ed)
+        st.caption("Movements in each item’s sale unit; inward includes opening stock when its date is selected.")
+        if movements.empty:
+            st.info("No stock movements in the selected date range."); return
+        s = movements[movements["direction"] == "Outward"]
+        p = movements[movements["direction"] == "Inward"]
+        sm = s.groupby(["month", "ITEM_NAME"]).agg(Sold=("q", "sum")).reset_index()
+        pm = p.groupby(["month", "ITEM_NAME"]).agg(Purchased=("q", "sum")).reset_index()
+        mv = pm.merge(sm, on=["month", "ITEM_NAME"], how="outer").fillna(0)
+        item = fx[0].selectbox("Item", sorted(mv["ITEM_NAME"].dropna().unique()), key="as_i")
+        im = mv[mv["ITEM_NAME"] == item].sort_values("month")
+        if not im.empty:
+            fig = go.Figure(); fig.add_trace(go.Bar(name="In", x=im["month"], y=im["Purchased"])); fig.add_trace(go.Bar(name="Out", x=im["month"], y=im["Sold"]))
+            fig.update_layout(barmode="group", height=280, margin=dict(t=10, b=10)); st.plotly_chart(fig, width="stretch")
+        ts = s.groupby("ITEM_NAME")["q"].sum().nlargest(20).reset_index()
+        fig2 = px.bar(ts, y="ITEM_NAME", x="q", orientation="h", text_auto=".2s"); fig2.update_layout(height=420, margin=dict(t=10, b=10), yaxis=dict(autorange="reversed"))
+        st.plotly_chart(fig2, width="stretch")
+
+
+    def page_analytics_sales():
+        import plotly.express as px
+        hdr("\U0001F4C8 Sales Analytics"); sd, ed, _ = dfr("asa")
+        df = fbd(DS.sales(), sd, ed)
+        d = df.groupby(df["Doc_Date"].dt.date)["BL_NETVAL"].sum().reset_index(); d.columns = ["Date", "Sales"]
+        fig = px.line(d, x="Date", y="Sales"); fig.update_layout(height=230, margin=dict(t=10, b=10)); st.plotly_chart(fig, width="stretch")
+        c1, c2 = st.columns(2)
+        with c1:
+            t = df.groupby("ITEM_NAME").agg(Revenue=("BL_NETVAL", "sum")).nlargest(20, "Revenue").reset_index()
+            fig2 = px.bar(t, y="ITEM_NAME", x="Revenue", orientation="h", text_auto=".2s"); fig2.update_layout(height=420, margin=dict(t=10, b=10), yaxis=dict(autorange="reversed")); st.plotly_chart(fig2, width="stretch")
+        with c2:
+            g = df.groupby("GRP_NAME").agg(Revenue=("BL_NETVAL", "sum")).reset_index()
+            fig3 = px.pie(g, names="GRP_NAME", values="Revenue", hole=.35); fig3.update_layout(height=420, margin=dict(t=10, b=10)); st.plotly_chart(fig3, width="stretch")
+        mg = df.groupby("ITEM_NAME").agg(Revenue=("BL_NETVAL", "sum"), Cost=("Item_Cost", "sum")).nlargest(20, "Revenue").reset_index()
+        mg["Margin"] = mg["Revenue"] - mg["Cost"]; mg["Margin%"] = (mg["Margin"] / mg["Revenue"].replace(0, float("nan")) * 100).round(1)
+        mg = mg[["ITEM_NAME", "Revenue", "Margin", "Cost", "Margin%"]]
+        st.dataframe(mg, width="stretch", hide_index=True, column_config={"Revenue": CC_AMT0, "Cost": CC_AMT0, "Margin": CC_AMT0})
+        st.caption("Revenue includes GST. Margin is that recorded revenue less source Item_Cost; confirm the cost basis before using it as a profitability measure.")
+        st.markdown("**Sales outlook — current and next financial year**")
+        st.caption("Forecast training uses prior financial years, independently of the historical chart date filter. Amounts use recorded invoice totals including GST and invoice rounding.")
+        from sales_forecast import project_sales
+        outlook = project_sales(AllData.doc_header(), today())
+        if not outlook["history"].empty:
+            st.dataframe(outlook["history"].rename(columns={"Sales": "Sales (incl. GST)", "Months": "Months with sales"}), hide_index=True, width="stretch")
+        if outlook["reason"]:
+            st.info(outlook["reason"])
+            return
+        monthly = outlook["monthly"]
+        this_year = monthly.loc[monthly.FY == current.label]
+        next_year = monthly.loc[monthly.FY != current.label]
+        if this_year.Actual.isna().all():
+            st.info("No current-year actual sales are loaded. The outlook is based entirely on prior-year records.")
+        a, b, c = st.columns(3)
+        a.metric(f"FY {current.label} expected total", f"{INR}{this_year.Expected.sum():,.0f}")
+        b.metric("Estimated remaining sales", f"{INR}{this_year.Remaining.sum():,.0f}")
+        c.metric(f"FY {next_year.FY.iloc[0]} forecast", f"{INR}{next_year.Expected.sum():,.0f}")
+        st.caption(f"Baseline: monthly sales in FY {outlook['baseline_year']}; annual growth assumption {outlook['growth']:.1%}, using the median of up to three consecutive historical year-on-year changes, limited to ±30%. Years need sales in all 12 months to qualify. Recorded actuals through {outlook['cutoff']:%d %b %Y}; a partial month's estimate cannot be below its recorded sales. Missing later records are estimated, not treated as zero sales.")
+        fig4 = px.line(monthly, x="Month", y=["Actual", "Expected"], markers=True)
+        fig4.update_layout(height=300, margin=dict(t=10, b=10)); st.plotly_chart(fig4, width="stretch")
+        st.dataframe(monthly, hide_index=True, width="stretch", column_config={c: CC_AMT for c in ["Actual", "Expected", "Remaining"]})
+        st.caption("This is a seasonal planning estimate, not a guarantee or a validated statistical confidence interval. Pricing, supply, promotions and missing source records can change outcomes.")
+
+
+    def page_analytics_purchase():
+        import plotly.express as px
+        hdr("\U0001F4C8 Purchase Analytics"); sd, ed, _ = dfr("apa")
+        st.caption("Purchase charts use taxable amounts excluding GST and other tax.")
+        df = fbd(DS.purchases(), sd, ed)
+        d = df.groupby(df["Doc_Date"].dt.date)["taxable_value"].sum().reset_index(); d.columns = ["Date", "Amount"]
+        fig = px.bar(d, x="Date", y="Amount", text_auto=".2s"); fig.update_layout(height=230, margin=dict(t=10, b=10)); st.plotly_chart(fig, width="stretch")
+        c1, c2 = st.columns(2)
+        with c1:
+            t = df.groupby("ITEM_NAME").agg(Amount=("taxable_value", "sum")).nlargest(15, "Amount").reset_index()
+            fig2 = px.bar(t, y="ITEM_NAME", x="Amount", orientation="h", text_auto=".2s"); fig2.update_layout(height=380, margin=dict(t=10, b=10), yaxis=dict(autorange="reversed")); st.plotly_chart(fig2, width="stretch")
+        with c2:
+            ts = df.groupby("supplier_name").agg(Amount=("taxable_value", "sum")).nlargest(15, "Amount").reset_index()
+            fig3 = px.bar(ts, y="supplier_name", x="Amount", orientation="h", text_auto=".2s"); fig3.update_layout(height=380, margin=dict(t=10, b=10), yaxis=dict(autorange="reversed")); st.plotly_chart(fig3, width="stretch")
+
+
+    def page_analytics_gst():
+        import plotly.express as px
+        import plotly.graph_objects as go
+        hdr("\U0001F4C8 GST Analytics"); sd, ed, _ = dfr("ag")
+        s = fbd(DS.sales(), sd, ed); p = fbd(DS.purchases(), sd, ed)
+        rs = s.groupby("Vat_Rate").agg(Taxable=("taxable_value", "sum"), Tax=("total_gst", "sum")).reset_index(); rs["Rate"] = rs["Vat_Rate"].astype(str) + "%"
+        fig = px.bar(rs, x="Rate", y="Taxable", text_auto=".2s"); fig.update_layout(height=230, margin=dict(t=10, b=10)); st.plotly_chart(fig, width="stretch")
+        sm = s.groupby("month").agg(Output=("total_gst", "sum")).reset_index(); pm = p.groupby("month").agg(Input=("total_gst", "sum")).reset_index()
+        gt = sm.merge(pm, on="month", how="outer").fillna(0); gt["Net"] = gt["Output"] - gt["Input"]
+        fig2 = go.Figure(); fig2.add_trace(go.Bar(name="Output", x=gt["month"], y=gt["Output"])); fig2.add_trace(go.Bar(name="Input", x=gt["month"], y=gt["Input"]))
+        fig2.add_trace(go.Scatter(name="Net", x=gt["month"], y=gt["Net"], mode="lines+markers")); fig2.update_layout(barmode="group", height=320, margin=dict(t=10, b=10))
+        st.plotly_chart(fig2, width="stretch")
+        st.dataframe(gt, width="stretch", hide_index=True, column_config={"Output": CC_AMT0, "Input": CC_AMT0, "Net": CC_AMT0})
+
+
+    # ═══════════════════════ ROUTER ═════════════════════════════════════════════
+    def page_validation():
+        from data_quality import validation_summary, invoice_reconciliation
+        hdr("Data Validation")
+        sd, ed, _ = dfr("validation")
+        st.caption(f"Integrity checks cover the current FY. Invoice reconciliation uses {sd:%d %b %Y} to {ed:%d %b %Y}. New or changed Access files are imported automatically.")
+        st.dataframe(validation_summary(DS), hide_index=True, width="stretch")
+        st.markdown("**Invoice reconciliation**")
+        st.caption("Invoice total minus inclusive line totals. Differences are shown explicitly, without changing the source values.")
+        reconciliation = invoice_reconciliation(DS)
+        reconciliation = reconciliation.loc[reconciliation.Doc_Id.isin(fbd(DS.doc_header(), sd, ed).Doc_Id)]
+        summary = reconciliation.groupby("Type").agg(Invoices=("Doc_Id", "count"), Invoice_Total=("Bill_Amt", "sum"),
+                                                      Line_Total=("Line_Total", "sum"), Difference=("Difference", "sum"))
+        st.dataframe(summary, column_config={c: CC_AMT for c in ["Invoice_Total", "Line_Total", "Difference"]}, width="stretch")
+        st.dataframe(reconciliation.loc[reconciliation.Difference.abs() > 0.01].sort_values("Difference"),
+                     hide_index=True, width="stretch", column_config={c: CC_AMT for c in ["Bill_Amt", "Line_Total", "Difference"]})
+        st.info("GST reports cover goods invoices. Financial reports show recorded ledger movements; the export uses implicit cash contra entries. Source cost values produce some negative item margins; verify these in the billing system before using margins for decisions.")
+
+
+    PAGES = {
+        "home": page_home,
+        "sales_billwise": page_sales_billwise, "sales_datewise": page_sales_datewise, "sales_monthly": page_sales_monthly,
+        "sales_hsn": page_sales_hsn, "sales_partywise": page_sales_partywise, "sales_gstno": page_sales_gstno,
+        "purch_billwise": page_purch_billwise, "purch_datewise": page_purch_datewise, "purch_monthly": page_purch_monthly,
+        "purch_hsn": page_purch_hsn, "purch_partywise": page_purch_partywise, "purch_gstno": page_purch_gstno,
+        "summary_stock": page_summary_stock, "summary_sales": page_summary_sales, "summary_purchase": page_summary_purchase,
+        "summary_gst": page_summary_gst, "summary_financial": page_summary_financial,
+        "analytics_stock": page_analytics_stock, "analytics_sales": page_analytics_sales,
+        "analytics_purchase": page_analytics_purchase, "analytics_gst": page_analytics_gst,
+        "validation": page_validation,
+    }
+    PAGES.get(st.session_state.page, page_home)()
