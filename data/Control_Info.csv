@@ -1,0 +1,29 @@
+﻿Control_Id,Description
+101,"Company Info (Yes - 1, No - 0)"
+102,"Document Title (Yes - 1, No - 0)"
+201,"Party Address (Yes - 1, No - 0)"
+202,"Party Place (Yes - 1, No - 0)"
+203,"Party Apgst No (Yes - 1, No - 0)"
+204,"Party Cst No (Yes - 1, No - 0)"
+301,"Due Date (Yes - 1, No - 0)"
+401,"Other Parameters ( Yes - 1, No - 0)"
+501,"Header Lines (Yes - 1, No - 0)"
+601,"Serial No (Yes - 1, No - 0)"
+602,"Item Code (Yes - 1, No - 0)"
+603,"Pack (Yes - 1, No - 0)"
+604,"Free (Yes - 1, No - 0)"
+605,"Discount % (Yes - 1, No - 0)"
+606,"Discount Amount (Yes - 1, No - 0)"
+701,"Qty Decimals (0, 1, 2)"
+702,"Free Decimals (0, 1, 2)"
+801,"Line Wise Charge Summary (Yes - 1, No - 0)"
+901,"Rupees in Words  (Yes - 1, No - 0)"
+1001,"Footer Lines (Yes - 1, No - 0)"
+1101,"For Stamp (Yes - 1, No - 0)"
+1201,"Company Apgst No (Yes - 1, No - 0)"
+1202,"Company Cst No (Yes - 1, No - 0)"
+1301,Page Width
+1302,Page Height
+1303,Across Invoices
+1304,Backward Lines at Beginning
+1305,Forward Lines at Ending

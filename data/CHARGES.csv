@@ -1,0 +1,8 @@
+﻿Chrg_Id,Chrg_Name,Chrg_Type,Chrg_Rate,Chrg_Style,Chrg_Gross,Act_ID,Chrg_Cost,PostDaybook,Ent_Date,Ent_Uid,Usage_Type,Chrg_Higher,Chrg_roundoff
+1,Disconts,4,0.0,2,0,10312,False,0,,0,0,0,False
+2,Add Amount,5,0.0,2,0,10313,False,0,,0,0,0,False
+3,Round Off,9,0.0,2,0,10313,False,0,,0,0,0,False
+4,HAMALI,5,0.0,2,0,10311,False,0,,0,0,0,False
+5,Freight,6,0.0,2,0,10312,False,0,,0,0,0,False
+6,TCS PAID,13,0.0,0,0,11340,False,0,,0,0,0,False
+7,TCS RECIEVED,13,0.0,0,0,11341,False,0,,0,0,0,False

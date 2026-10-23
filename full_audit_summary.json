@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-10-22T12:13:32.226411+00:00",
+  "pytest_tests": 217,
+  "junit_reports": [
+    {
+      "file": "full_regression_results.xml",
+      "tests": 139,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "page_calculation_results.xml",
+      "tests": 76,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "source_arithmetic_results.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "original_checks_passed": 70,
+  "access_tables_matched": 123,
+  "live_routes_passed": 23,
+  "source_sha256": "5330c736bde104d64281d6eedc635ec95ed6094dbb842a3968f97689f7d99595",
+  "active_sources": [
+    [
+      "3g2026.mdb",
+      "[\"2026-27\"]"
+    ]
+  ],
+  "health": {
+    "8502": "ok",
+    "8503": "ok"
+  },
+  "latest_date_policy": {
+    "checked_at": "2026-10-22T12:24:33.952208+00:00",
+    "tests_passed": 34,
+    "live_routes_passed": 23,
+    "test_report": "report_date_policy_results.xml",
+    "live_report": "report_date_policy_live.json",
+    "defaults": {
+      "billwise": "Latest current-FY date",
+      "other_sales_purchase": "Current FY from 1 April through latest date",
+      "analytics": "All available data",
+      "home_summary_validation": "Latest current-FY date"
+    }
+  }
+}

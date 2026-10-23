@@ -1,0 +1,150 @@
+{
+  "8503_home_latest_day": {
+    "dates": {
+      "From": [
+        "2026-08-07"
+      ],
+      "To": [
+        "2026-08-07"
+      ]
+    },
+    "metrics": {
+      "Total Sales": "\u20b9622,937",
+      "Total Purchases": "\u20b90",
+      "Sales Invoices": "54",
+      "Purchase Bills": "0"
+    },
+    "rows": [],
+    "fy_options": []
+  },
+  "8503_sales_latest_day": {
+    "dates": {
+      "From": [
+        "2026-08-07"
+      ],
+      "To": [
+        "2026-08-07"
+      ]
+    },
+    "metrics": {
+      "Bills": "54",
+      "Lines": "120",
+      "Qty": "3,222",
+      "Amount": "\u20b9622,940.60"
+    },
+    "rows": [
+      120
+    ],
+    "fy_options": []
+  },
+  "8503_return_home": {
+    "dates": {
+      "From": [
+        "2026-08-07"
+      ],
+      "To": [
+        "2026-08-07"
+      ]
+    },
+    "metrics": {
+      "Total Sales": "\u20b9622,937",
+      "Total Purchases": "\u20b90",
+      "Sales Invoices": "54",
+      "Purchase Bills": "0"
+    },
+    "rows": [],
+    "fy_options": []
+  },
+  "8503_analytics_all_data": {
+    "dates": {
+      "From": [
+        "2026-03-31"
+      ],
+      "To": [
+        "2026-08-07"
+      ]
+    },
+    "metrics": {},
+    "rows": [
+      20
+    ],
+    "fy_options": [
+      "All years",
+      "2026-27"
+    ]
+  },
+  "8502_home_latest_day": {
+    "dates": {
+      "From": [
+        "2026-08-07"
+      ],
+      "To": [
+        "2026-08-07"
+      ]
+    },
+    "metrics": {
+      "Total Sales": "\u20b9622,937",
+      "Total Purchases": "\u20b90",
+      "Sales Invoices": "54",
+      "Purchase Bills": "0"
+    },
+    "rows": [],
+    "fy_options": []
+  },
+  "8502_sales_latest_day": {
+    "dates": {
+      "From": [
+        "2026-08-07"
+      ],
+      "To": [
+        "2026-08-07"
+      ]
+    },
+    "metrics": {
+      "Bills": "54",
+      "Lines": "120",
+      "Qty": "3,222",
+      "Amount": "\u20b9622,940.60"
+    },
+    "rows": [
+      120
+    ],
+    "fy_options": []
+  },
+  "8502_return_home": {
+    "dates": {
+      "From": [
+        "2026-08-07"
+      ],
+      "To": [
+        "2026-08-07"
+      ]
+    },
+    "metrics": {
+      "Total Sales": "\u20b9622,937",
+      "Total Purchases": "\u20b90",
+      "Sales Invoices": "54",
+      "Purchase Bills": "0"
+    },
+    "rows": [],
+    "fy_options": []
+  },
+  "8502_analytics_all_data": {
+    "dates": {
+      "From": [
+        "2026-03-31"
+      ],
+      "To": [
+        "2026-08-07"
+      ]
+    },
+    "metrics": {},
+    "rows": [
+      20
+    ],
+    "fy_options": [
+      "All years",
+      "2026-27"
+    ]
+  }
+}

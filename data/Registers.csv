@@ -1,0 +1,10 @@
+﻿Reg_ID,Vtype,Tt_ID,Reg_Title,Oth_Print,Reg_Layout,Ent_Date,Ent_Uid
+1,Purchase,"4,5",Purchase Register,False,,,0
+2,Sales,"1,2,3",Sales Register,False,,,0
+4,Purchase,"4,5",MY PURCHASE REGISTER,False,,,0
+12,Sales Return,6,New,False,,,0
+20,Sales,"1,2,28,30",Credit sale ,False,,,0
+21,Sales,"1,2,28,30",New sale register,False,,,0
+24,Sales,30,Britannia Discount Sales Reg,False,,,0
+26,Sales,31,BRIT GST DISCOUNTS,False,,,0
+27,Sales,31,GST Sales Register,False,,,0

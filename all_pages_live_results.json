@@ -1,0 +1,418 @@
+{
+  "checked_at": "2026-10-22T12:09:14.128821+00:00",
+  "url": "http://127.0.0.1:8503",
+  "routes_passed": 23,
+  "pages": {
+    "home": {
+      "seconds": 0.404,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [
+        {
+          "label": "Total Sales",
+          "value": "\u20b9622,937"
+        },
+        {
+          "label": "Total Purchases",
+          "value": "\u20b90"
+        },
+        {
+          "label": "Sales Invoices",
+          "value": "54"
+        },
+        {
+          "label": "Purchase Bills",
+          "value": "0"
+        }
+      ],
+      "table_rows": []
+    },
+    "sales_billwise": {
+      "seconds": 0.285,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [
+        {
+          "label": "Bills",
+          "value": "54"
+        },
+        {
+          "label": "Lines",
+          "value": "120"
+        },
+        {
+          "label": "Qty",
+          "value": "3,222"
+        },
+        {
+          "label": "Amount",
+          "value": "\u20b9622,940.60"
+        }
+      ],
+      "table_rows": [
+        120
+      ]
+    },
+    "sales_datewise": {
+      "seconds": 0.382,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [],
+      "table_rows": [
+        1
+      ]
+    },
+    "sales_monthly": {
+      "seconds": 0.421,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [],
+      "table_rows": [
+        1
+      ]
+    },
+    "sales_hsn": {
+      "seconds": 0.298,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [],
+      "table_rows": [
+        8
+      ]
+    },
+    "sales_partywise": {
+      "seconds": 0.345,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [],
+      "table_rows": [
+        51
+      ]
+    },
+    "sales_gstno": {
+      "seconds": 0.181,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [],
+      "table_rows": []
+    },
+    "purch_billwise": {
+      "seconds": 0.222,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [
+        {
+          "label": "Bills",
+          "value": "0"
+        },
+        {
+          "label": "Lines",
+          "value": "0"
+        },
+        {
+          "label": "Amount",
+          "value": "\u20b90.00"
+        }
+      ],
+      "table_rows": [
+        0
+      ]
+    },
+    "purch_datewise": {
+      "seconds": 0.376,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [],
+      "table_rows": [
+        0
+      ]
+    },
+    "purch_monthly": {
+      "seconds": 0.522,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [],
+      "table_rows": [
+        0
+      ]
+    },
+    "purch_hsn": {
+      "seconds": 0.26,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [],
+      "table_rows": [
+        0
+      ]
+    },
+    "purch_partywise": {
+      "seconds": 0.339,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [],
+      "table_rows": [
+        0
+      ]
+    },
+    "purch_gstno": {
+      "seconds": 0.24,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [],
+      "table_rows": []
+    },
+    "summary_stock": {
+      "seconds": 0.308,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [
+        {
+          "label": "In Stock",
+          "value": "55"
+        },
+        {
+          "label": "Out/Zero",
+          "value": "433"
+        },
+        {
+          "label": "Total",
+          "value": "488"
+        }
+      ],
+      "table_rows": [
+        488
+      ]
+    },
+    "summary_sales": {
+      "seconds": 0.313,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [
+        {
+          "label": "Invoices",
+          "value": "54"
+        },
+        {
+          "label": "Qty",
+          "value": "3,222"
+        },
+        {
+          "label": "Sales (incl. GST)",
+          "value": "\u20b9622,941"
+        },
+        {
+          "label": "Tax",
+          "value": "\u20b928,665"
+        }
+      ],
+      "table_rows": [
+        3,
+        3,
+        1
+      ]
+    },
+    "summary_purchase": {
+      "seconds": 0.276,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [
+        {
+          "label": "Bills",
+          "value": "0"
+        },
+        {
+          "label": "Qty",
+          "value": "0"
+        },
+        {
+          "label": "Taxable",
+          "value": "\u20b90"
+        },
+        {
+          "label": "Tax",
+          "value": "\u20b90"
+        }
+      ],
+      "table_rows": [
+        0
+      ]
+    },
+    "summary_gst": {
+      "seconds": 0.354,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [
+        {
+          "label": "CGST",
+          "value": "\u20b914,332"
+        },
+        {
+          "label": "SGST",
+          "value": "\u20b914,332"
+        },
+        {
+          "label": "IGST",
+          "value": "\u20b90"
+        },
+        {
+          "label": "Total",
+          "value": "\u20b928,665"
+        },
+        {
+          "label": "CGST",
+          "value": "\u20b90"
+        },
+        {
+          "label": "SGST",
+          "value": "\u20b90"
+        },
+        {
+          "label": "IGST",
+          "value": "\u20b90"
+        },
+        {
+          "label": "Total",
+          "value": "\u20b90"
+        },
+        {
+          "label": "CGST",
+          "value": "\u20b914,332"
+        },
+        {
+          "label": "SGST",
+          "value": "\u20b914,332"
+        },
+        {
+          "label": "IGST",
+          "value": "\u20b90"
+        },
+        {
+          "label": "Difference",
+          "value": "\u20b928,665"
+        }
+      ],
+      "table_rows": [
+        1
+      ]
+    },
+    "summary_financial": {
+      "seconds": 0.297,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [
+        {
+          "label": "Trading Income",
+          "value": "\u20b9622,941"
+        },
+        {
+          "label": "Expenses",
+          "value": "\u20b94"
+        },
+        {
+          "label": "Recorded Income less Expenses",
+          "value": "\u20b9622,937"
+        },
+        {
+          "label": "Customer Net Debits (period)",
+          "value": "\u20b913,187"
+        },
+        {
+          "label": "Supplier Net Credits (period)",
+          "value": "\u20b90"
+        }
+      ],
+      "table_rows": [
+        15
+      ]
+    },
+    "analytics_stock": {
+      "seconds": 0.423,
+      "dates": [
+        "2026-03-31",
+        "2026-08-07"
+      ],
+      "metrics": [],
+      "table_rows": []
+    },
+    "analytics_sales": {
+      "seconds": 0.684,
+      "dates": [
+        "2026-03-31",
+        "2026-08-07"
+      ],
+      "metrics": [],
+      "table_rows": [
+        20
+      ]
+    },
+    "analytics_purchase": {
+      "seconds": 0.538,
+      "dates": [
+        "2026-03-31",
+        "2026-08-07"
+      ],
+      "metrics": [],
+      "table_rows": []
+    },
+    "analytics_gst": {
+      "seconds": 0.45,
+      "dates": [
+        "2026-03-31",
+        "2026-08-07"
+      ],
+      "metrics": [],
+      "table_rows": [
+        5
+      ]
+    },
+    "validation": {
+      "seconds": 1.055,
+      "dates": [
+        "2026-08-07",
+        "2026-08-07"
+      ],
+      "metrics": [],
+      "table_rows": [
+        15,
+        1,
+        28
+      ]
+    }
+  }
+}

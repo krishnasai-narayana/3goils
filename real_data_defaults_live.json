@@ -1,0 +1,190 @@
+{
+  "8503_home_today": {
+    "dates": {
+      "From": [
+        "2026-10-22"
+      ],
+      "To": [
+        "2026-10-22"
+      ]
+    },
+    "rows": [],
+    "metrics": {
+      "Total Sales": "\u20b90",
+      "Total Purchases": "\u20b90",
+      "Sales Invoices": "0",
+      "Purchase Bills": "0"
+    },
+    "fy_options": []
+  },
+  "8503_all_real_years_analytics": {
+    "dates": {
+      "From": [
+        "2026-03-31"
+      ],
+      "To": [
+        "2026-08-07"
+      ]
+    },
+    "rows": [
+      20
+    ],
+    "metrics": {},
+    "fy_options": [
+      "All years",
+      "2026-27"
+    ]
+  },
+  "8503_back_home": {
+    "dates": {
+      "From": [
+        "2026-10-22"
+      ],
+      "To": [
+        "2026-10-22"
+      ]
+    },
+    "rows": [],
+    "metrics": {
+      "Total Sales": "\u20b90",
+      "Total Purchases": "\u20b90",
+      "Sales Invoices": "0",
+      "Purchase Bills": "0"
+    },
+    "fy_options": []
+  },
+  "8503_bills_today": {
+    "dates": {
+      "From": [
+        "2026-10-22"
+      ],
+      "To": [
+        "2026-10-22"
+      ]
+    },
+    "rows": [
+      0
+    ],
+    "metrics": {
+      "Bills": "0",
+      "Lines": "0",
+      "Qty": "0",
+      "Amount": "\u20b90.00"
+    },
+    "fy_options": []
+  },
+  "8503_real_bills_on_loaded_day": {
+    "dates": {
+      "From": [
+        "2026-10-22"
+      ],
+      "To": [
+        "2026-10-22"
+      ]
+    },
+    "rows": [
+      120
+    ],
+    "metrics": {
+      "Bills": "54",
+      "Lines": "120",
+      "Qty": "3,222",
+      "Amount": "\u20b9622,940.60"
+    },
+    "fy_options": []
+  },
+  "8502_home_today": {
+    "dates": {
+      "From": [
+        "2026-10-22"
+      ],
+      "To": [
+        "2026-10-22"
+      ]
+    },
+    "rows": [],
+    "metrics": {
+      "Total Sales": "\u20b90",
+      "Total Purchases": "\u20b90",
+      "Sales Invoices": "0",
+      "Purchase Bills": "0"
+    },
+    "fy_options": []
+  },
+  "8502_all_real_years_analytics": {
+    "dates": {
+      "From": [
+        "2026-03-31"
+      ],
+      "To": [
+        "2026-08-07"
+      ]
+    },
+    "rows": [
+      20
+    ],
+    "metrics": {},
+    "fy_options": [
+      "All years",
+      "2026-27"
+    ]
+  },
+  "8502_back_home": {
+    "dates": {
+      "From": [
+        "2026-10-22"
+      ],
+      "To": [
+        "2026-10-22"
+      ]
+    },
+    "rows": [],
+    "metrics": {
+      "Total Sales": "\u20b90",
+      "Total Purchases": "\u20b90",
+      "Sales Invoices": "0",
+      "Purchase Bills": "0"
+    },
+    "fy_options": []
+  },
+  "8502_bills_today": {
+    "dates": {
+      "From": [
+        "2026-10-22"
+      ],
+      "To": [
+        "2026-10-22"
+      ]
+    },
+    "rows": [
+      0
+    ],
+    "metrics": {
+      "Bills": "0",
+      "Lines": "0",
+      "Qty": "0",
+      "Amount": "\u20b90.00"
+    },
+    "fy_options": []
+  },
+  "8502_real_bills_on_loaded_day": {
+    "dates": {
+      "From": [
+        "2026-10-22"
+      ],
+      "To": [
+        "2026-10-22"
+      ]
+    },
+    "rows": [
+      120
+    ],
+    "metrics": {
+      "Bills": "54",
+      "Lines": "120",
+      "Qty": "3,222",
+      "Amount": "\u20b9622,940.60"
+    },
+    "fy_options": []
+  }
+}

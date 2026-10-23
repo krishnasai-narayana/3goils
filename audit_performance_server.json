@@ -1,0 +1,30 @@
+{
+  "home": {
+    "seconds": 13.4889,
+    "bytes_received": 9729
+  },
+  "sales_first_navigation": {
+    "seconds": 1.2515,
+    "bytes_received": 22513
+  },
+  "sales_warm_1": {
+    "seconds": 0.2703,
+    "bytes_received": 22513
+  },
+  "sales_warm_2": {
+    "seconds": 0.2846,
+    "bytes_received": 22513
+  },
+  "sales_warm_3": {
+    "seconds": 0.274,
+    "bytes_received": 22513
+  },
+  "return_home": {
+    "seconds": 0.3657,
+    "bytes_received": 9731
+  },
+  "sales_repeat_navigation": {
+    "seconds": 0.2832,
+    "bytes_received": 22513
+  }
+}

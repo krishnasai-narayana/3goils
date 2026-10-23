@@ -1,0 +1,23 @@
+{
+  "reference_sha256": "5330c736bde104d64281d6eedc635ec95ed6094dbb842a3968f97689f7d99595",
+  "real_cache_sources": [
+    "3g2026.mdb"
+  ],
+  "synthetic_directory_removed": true,
+  "source_unchanged": true,
+  "test_results": {
+    "date_defaults_results.xml": {
+      "tests": 30,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "regression_results.xml": {
+      "tests": 109,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    }
+  },
+  "default_mode": "latest valid current-FY transaction date; Analytics all available FYs"
+}

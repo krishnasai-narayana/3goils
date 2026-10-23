@@ -1,0 +1,127 @@
+﻿sale_type,Sale_Text,Rate,Free_Act_Id,Sign_Type
+201,Purchase 0%,0.0,0,0.0
+202,Purchase 5%,5.0,0,0.0
+203,Purchase 12%,12.0,0,0.0
+204,Purchase 18%,18.0,0,0.0
+205,Purchase 28%,28.0,0,0.0
+251,Purchase 40%,40.0,0,0.0
+206,GSTInput 0%,0.0,0,0.0
+207,GSTInput 5%,5.0,0,0.0
+208,GSTInput 12%,12.0,0,0.0
+209,GSTInput 18%,18.0,0,0.0
+210,GSTInput 28%,28.0,0,0.0
+252,GSTInput 40%,40.0,0,0.0
+211,Sales 0%,0.0,0,0.0
+212,Sales 5%,5.0,0,0.0
+213,Sales 12%,12.0,0,0.0
+214,Sales 18%,18.0,0,0.0
+215,Sales 28%,28.0,0,0.0
+253,Sales 40%,40.0,0,0.0
+216,GSTOutput 0%,0.0,0,0.0
+217,GSTOutput 5%,5.0,0,0.0
+218,GSTOutput 12%,12.0,0,0.0
+219,GSTOutput 18%,18.0,0,0.0
+220,GSTOutput 28%,28.0,0,0.0
+254,GSTOutput 40%,40.0,0,0.0
+221,CGSTInput 0%,0.0,0,0.0
+222,CGSTInput 5%,5.0,0,0.0
+223,CGSTInput 12%,12.0,0,0.0
+224,CGSTInput 18%,18.0,0,0.0
+225,CGSTInput 28%,28.0,0,0.0
+255,CGSTInput 40%,40.0,0,0.0
+226,CGSTOutput 0%,0.0,0,0.0
+227,CGSTOutput 5%,5.0,0,0.0
+228,CGSTOutput 12%,12.0,0,0.0
+229,CGSTOutput 18%,18.0,0,0.0
+230,CGSTOutput 28%,28.0,0,0.0
+256,CGSTOutput 40%,40.0,0,0.0
+231,IGSTPurchase 0%,0.0,0,0.0
+232,IGSTPurchase 5%,5.0,0,0.0
+233,IGSTPurchase 12%,12.0,0,0.0
+234,IGSTPurchase 18%,18.0,0,0.0
+235,IGSTPurchase 28%,28.0,0,0.0
+257,IGSTPurchase 40%,40.0,0,0.0
+236,IGSTInput 0%,0.0,0,0.0
+237,IGSTInput 5%,5.0,0,0.0
+238,IGSTInput 12%,12.0,0,0.0
+239,IGSTInput 18%,18.0,0,0.0
+240,IGSTInput 28%,28.0,0,0.0
+258,IGSTInput 40%,40.0,0,0.0
+241,IGSTSales 0%,0.0,0,0.0
+242,IGSTSales 5%,5.0,0,0.0
+243,IGSTSales 12%,12.0,0,0.0
+244,IGSTSales 18%,18.0,0,0.0
+245,IGSTSales 28%,28.0,0,0.0
+259,IGSTSales 40%,40.0,0,0.0
+246,IGSTOutput 0%,0.0,0,0.0
+247,IGSTOutput 5%,5.0,0,0.0
+248,IGSTOutput 12%,12.0,0,0.0
+249,IGSTOutput 18%,18.0,0,0.0
+250,IGSTOutput 28%,28.0,0,0.0
+260,IGSTOutput 40%,40.0,0,0.0
+261,Purchase CessA/c,0.0,0,0.0
+262,Purchase CCRateA/c,0.0,0,0.0
+263,Sale CessA/c,0.0,0,0.0
+264,Sale CCRateA/c,0.0,0,0.0
+265,Purchase 3%,3.0,0,0.0
+266,GSTInput 3%,3.0,0,0.0
+267,CGSTInput 3%,3.0,0,0.0
+268,IGSTPurchase 3%,3.0,0,0.0
+269,IGSTInput 3%,3.0,0,0.0
+270,Sales 3%,3.0,0,0.0
+271,GSTOutput 3%,3.0,0,0.0
+272,CGSTOutput 3%,3.0,0,0.0
+273,IGSTSales 3%,3.0,0,0.0
+274,IGSTOutput 3%,3.0,0,0.0
+0,Salable,0.0,0,
+1,Broken,0.0,0,
+2,Expiry,0.0,0,
+3,Spoiled,0.0,0,
+4,Samples,0.0,0,
+5,Shortage,0.0,0,
+12,Direct Expense,0.0,12,0.0
+13,Direct Income,0.0,13,1.0
+14,Opening Stock,0.0,1,0.0
+15,Closing Stock,0.0,30,1.0
+16,First Purchase,0.0,2,0.0
+17,Second Purchase,0.0,3,0.0
+18,First Sales,0.0,15,1.0
+19,First Sales(Non Local),0.0,16,1.0
+20,Second Sales,0.0,17,1.0
+21,Second Sales(Non Local),0.0,18,1.0
+31,Purchase – Exempted,0.0,6,0.0
+32,Purchase – 1%,1.0,7,0.0
+33,Purchase – 4%,4.0,8,0.0
+34,Purchase – 12.5 %,12.0,9,0.0
+35,Purchase – Special,0.0,10,0.0
+36,Purchase – Other,0.0,11,0.0
+51,Sales – Exempt,0.0,21,1.0
+52,Sales – Export,0.0,22,1.0
+53,Sales – CST,0.0,23,1.0
+54,Sales – Purchase Point,0.0,24,1.0
+55,Sales – 1%,1.0,25,1.0
+56,Sales – 4%,4.0,26,1.0
+57,Sales – 12.5 %,12.0,27,1.0
+58,Sales – Special,0.0,28,1.0
+59,Sales – Other,0.0,29,1.0
+72,Vat Input – 1%,1.0,32,0.0
+73,Vat Input – 4%,4.0,31,0.0
+74,Vat Input – 12.5%,12.0,32,0.0
+75,Vat Input – Special,0.0,33,0.0
+76,Vat Input – Other,0.0,34,0.0
+94,Vat Output – Purchase Point,0.0,35,0.0
+95,Vat Output – 1%,1.0,36,1.0
+96,Vat Output – 4%,4.0,37,1.0
+97,Vat Output – 12.5%,12.0,38,1.0
+98,Vat Output – Special,0.0,39,1.0
+99,Vat Output – Other,0.0,40,1.0
+100,Indiect Incomes,0.0,41,1.0
+101,Indirect Expenses,0.0,42,0.0
+102,First Purchase Return,0.0,4,1.0
+103,Second Purchase Returns,0.0,5,1.0
+104,First Sales Returns,0.0,19,0.0
+105,Second Sales Returns,0.0,20,0.0
+93,Vat Output 5%,5.0,0,0.0
+77,Vat Input 5%,5.0,0,0.0
+60,Sales 5%,5.0,0,0.0
+37,Purchase 5%,5.0,0,0.0

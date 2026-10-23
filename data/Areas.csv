@@ -1,0 +1,5 @@
+﻿Area_Id,Area_Name,Area_Type,Rec_Higher,Rec_Level,Rec_Index,Rec_Order,Salesman_ID,Visit_Date,Ent_Date,Ent_Uid,Usage_Type
+1,AMARAVATHI,AMT,0,0,1,4,0,,2015-05-14 17:44:52,1,0
+2,SATTENAPALLI,STPL,0,0,1,3,0,,2015-05-14 17:45:19,1,0
+3,ACHAMPETA,ACPT,0,0,1,2,0,,2015-05-14 17:45:39,1,0
+4,DACHEPALLI,DCPL,0,0,1,1,0,,2016-01-14 16:37:24,1,0

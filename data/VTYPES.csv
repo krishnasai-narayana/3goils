@@ -1,0 +1,16 @@
+﻿Voucher_Id,VOUCHTYPE,Dsp_Type,InOut,Dsp_Order
+0,OpStock,Opening Stock,1,0.0
+1,Sales,Sales,2,
+2,Purchase,Purchases,1,
+3,Sales Return,Sales Return,1,
+4,Purchase Return,Purchase Return,2,
+5,Transfer,Transfer,3,
+6,Delivery Challan,Delivery Challan,3,
+7,Receipts,Receipts,4,
+8,Payments,Payments,4,
+9,Credit Note,Credit Note,4,
+10,Debit Note,Debit Note,4,
+11,Journal Voucher,Journal Voucher,4,
+12,Orders,Orders,3,0.0
+13,Process,Production,3,0.0
+14,Services,Services,3,0.0

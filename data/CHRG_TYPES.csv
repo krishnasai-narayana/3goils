@@ -1,0 +1,11 @@
+﻿Chtp_Id,Chtp_Name,Chtp_Op
+1,Excise,True
+2,Cst,True
+3,SST,True
+4,Discount,False
+5,Add,True
+6,Less,False
+8,VAT,True
+9,RoundOff,False
+10,Surcharge,False
+13,TCS,True

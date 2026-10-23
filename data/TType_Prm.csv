@@ -1,0 +1,4 @@
+﻿TT_ID,Pid,Pname,Type,Print_opt,Def_Value,Param_Value
+30,1,UID,1,1,,0
+31,1,UID,1,0,,0
+31,2,Vehicle No,1,1,,0

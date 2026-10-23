@@ -1,0 +1,26 @@
+{
+  "origin": "http://127.0.0.1:8503",
+  "runs": {
+    "fresh_home": {
+      "seconds": 0.155,
+      "table_rows": [],
+      "pagination_control": false
+    },
+    "fresh_sales_billwise": {
+      "seconds": 0.253,
+      "table_rows": [
+        1000
+      ],
+      "pagination_control": true
+    },
+    "sales_after_45_seconds": {
+      "seconds": 0.27,
+      "table_rows": [
+        1000
+      ],
+      "pagination_control": true
+    }
+  },
+  "heartbeat_seconds": 45.0,
+  "status": "passed"
+}
