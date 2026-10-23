@@ -256,7 +256,7 @@ def revision():
             key_files = ["Doc_Header.csv", "Stock_Delv.csv", "Stock_Recd.csv", "DayBook.csv"]
             sig = ":".join(str(int((config.DATA_DIR / f).stat().st_mtime_ns))
                            for f in key_files if (config.DATA_DIR / f).exists())
-            return hash(sig)
+            return int(hashlib.md5(sig.encode()).hexdigest(), 16)
         except Exception:
             return 0
     try:
