@@ -157,6 +157,7 @@ Whenever the `3G2026.mdb` file is updated with new billing data:
    - Export all CSVs from the `.mdb` file automatically
    - Commit changes with today's date
    - Push to GitHub
+   - Push any previously committed update if an earlier run stopped before pushing, even when the CSVs are unchanged
 4. The live app at **https://3goils.streamlit.app** auto-updates within **2 minutes**
 5. Hard refresh the browser: **Ctrl + Shift + R**
 

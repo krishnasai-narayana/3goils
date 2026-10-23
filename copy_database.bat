@@ -1,0 +1,1 @@
+copy "D:\Essel Eezy\EezyData\3G2026.mdb" "E:\\3goils\\database\\"
