@@ -32,17 +32,14 @@ _LOCAL = threading.local()
 _WORKER = None
 _WORKER_LOCK = threading.Lock()
 
-
 def financial_year(dates):
     dates = pd.to_datetime(dates)
     year = dates.dt.year - (dates.dt.month < 4).astype(int)
     return year.astype(str) + "-" + ((year + 1) % 100).astype(str).str.zfill(2)
 
-
 def fingerprint(path):
     stat = path.stat()
     return f"{stat.st_size}:{stat.st_mtime_ns}"
-
 
 def read_access(path):
     import pyodbc
@@ -59,7 +56,6 @@ def read_access(path):
         return tables
     finally:
         connection.close()
-
 
 def validate_tables(tables):
     for name, columns in TABLE_COLUMNS.items():
@@ -101,10 +97,8 @@ def validate_tables(tables):
         raise ValueError("No dated business transactions to identify the financial year")
     return sorted(financial_year(business_dates).unique().tolist())
 
-
 def _quote(name):
     return '"' + name.replace('"', '""') + '"'
-
 
 def _cell(value):
     if pd.isna(value):
@@ -112,7 +106,6 @@ def _cell(value):
     if isinstance(value, (dt.datetime, dt.date, pd.Timestamp)):
         return value.isoformat()
     return value.item() if hasattr(value, "item") else value
-
 
 class DatabaseSync:
     def __init__(self, directory, cache, reader=read_access, stable_seconds=2):
@@ -241,7 +234,6 @@ class DatabaseSync:
         self._stopped.set()
         self._wake.set()
 
-
 def start():
     global _WORKER
     if os.environ.get("THREEG_AUTO_IMPORT", "1") == "0":
@@ -252,19 +244,26 @@ def start():
             threading.Thread(target=_WORKER.run, name="mdb-import", daemon=True).start()
     return _WORKER
 
-
 def revision():
     snapshot = getattr(_LOCAL, "connection", None)
     if snapshot is not None:
         return _LOCAL.revision
     if not config.IMPORT_CACHE.exists():
-        return 0
+        # No SQLite cache (e.g. Streamlit Cloud, CSV-only mode).
+        # Use modification times of key CSV files as a revision signal so that
+        # pushing new CSVs to GitHub causes the data cache to reload automatically.
+        try:
+            key_files = ["Doc_Header.csv", "Stock_Delv.csv", "Stock_Recd.csv", "DayBook.csv"]
+            sig = ":".join(str(int((config.DATA_DIR / f).stat().st_mtime_ns))
+                           for f in key_files if (config.DATA_DIR / f).exists())
+            return hash(sig)
+        except Exception:
+            return 0
     try:
         with closing(sqlite3.connect(config.IMPORT_CACHE, timeout=2)) as connection:
             return connection.execute("SELECT revision FROM _meta").fetchone()[0]
     except sqlite3.Error:
         return 0
-
 
 @contextmanager
 def read_snapshot():
@@ -283,7 +282,6 @@ def read_snapshot():
         _LOCAL.connection = None
         if connection is not None:
             connection.close()
-
 
 def read_table(filename, **kwargs):
     if revision() == 0:
