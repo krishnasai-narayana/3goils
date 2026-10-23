@@ -21,7 +21,10 @@ def main():
         import pyodbc
         import pandas as pd
     except ImportError:
-        sys.exit("Install dependencies: pip install pyodbc pandas")
+        sys.exit(
+            f"Required Python package is missing for {sys.executable}. "
+            "Install it with: python -m pip install pyodbc pandas"
+        )
 
     if not MDB_PATH.exists():
         sys.exit(f"Database not found: {MDB_PATH}")

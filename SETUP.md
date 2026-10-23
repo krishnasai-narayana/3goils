@@ -92,13 +92,13 @@ Follow these steps in order on a brand new computer with nothing installed.
 Open Command Prompt **inside the project folder** and run:
 
 ```
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
-If you also want to export from the `.mdb` file (Step 3 done), also install:
+If you also want to export from the `.mdb` file (Step 3 done), install the packages:
 
 ```
-pip install pyodbc
+python -m pip install pyodbc pandas
 ```
 
 ---
@@ -169,7 +169,7 @@ Whenever the `3G2026.mdb` file is updated with new billing data:
 | Start the app locally | `python -m streamlit run app.py` |
 | Update data and push | Double-click `update_data.bat` |
 | Pull latest code changes | `git pull origin main` |
-| Install/update packages | `pip install -r requirements.txt` |
+| Install/update packages | `python -m pip install -r requirements.txt` |
 
 | Location | Path |
 |----------|------|
@@ -200,6 +200,10 @@ Whenever the `3G2026.mdb` file is updated with new billing data:
 **Access ODBC driver not found**
 → Install the 64-bit driver from Microsoft (Step 3)
 → Must match your Python bitness (64-bit Python needs 64-bit driver)
+
+**CSV export says `pyodbc` is missing**
+→ The update script will use the existing Anaconda Python if the default Python is missing export packages
+→ Otherwise install with `python -m pip install pyodbc pandas`; if pip requires a C++ compiler, use Python 3.13
 
 **`update_data.bat` fails at export step**
 → Check that `3G2026.mdb` is in the `database\` folder

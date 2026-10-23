@@ -195,7 +195,10 @@ class DatabaseSync:
                     self.status[name] = "Importing"
                     try:
                         with path.open('rb') as stream:
-                            digest = hashlib.file_digest(stream, 'sha256').hexdigest()
+                            file_hash = hashlib.sha256()
+                            for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+                                file_hash.update(chunk)
+                            digest = file_hash.hexdigest()
                         duplicate = next((other for other, (_, sha) in known.items() if sha == digest and other != name), None)
                         if duplicate:
                             self.status[name] = f"Ignored identical copy of {duplicate}"

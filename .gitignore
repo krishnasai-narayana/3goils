@@ -4,3 +4,4 @@ __pycache__/
 database/
 *.log
 data/mdb_cache.sqlite3*
+secrets.csv
