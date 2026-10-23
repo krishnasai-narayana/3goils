@@ -93,3 +93,4 @@ all filtered rows. The recorded sale rates and amounts remain GST-inclusive.
 - Goods GST reports exclude service vouchers and other tax adjustments. The displayed difference is not a complete GST-return calculation.
 - Financial reports show recorded ledger movements. They do not reconstruct implicit cash contra entries or account opening balances and must not be interpreted as a complete trial balance or profit-and-loss statement.
 - Financial Summary retains accounts with activity even when their net movement is zero. HSN and monthly summary totals include cess/additional tax in `Other_Tax`. Payment modes without a confirmed meaning retain their source code rather than an assumed payment label.
+
