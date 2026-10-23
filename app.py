@@ -20,6 +20,8 @@ with database_sync.read_snapshot():
     [data-testid="stHorizontalBlock"]{gap:0.3rem}
     [data-testid="stMetric"]{padding:0.2rem 0!important}
     hr{margin:0.3rem 0!important}
+    .stAppDeployButton, [data-testid="stToolbar"],
+    footer, #MainMenu{display:none!important}
     </style>""", unsafe_allow_html=True)
 
     if "page" not in st.session_state:
