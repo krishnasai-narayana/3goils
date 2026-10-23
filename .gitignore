@@ -1,6 +1,6 @@
 __pycache__/
 *.pyc
 .streamlit/cache/
-database/*.mdb
+database/
 *.log
 data/mdb_cache.sqlite3*
