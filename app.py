@@ -21,11 +21,11 @@ with database_sync.read_snapshot():
     [data-testid="stMetric"]{padding:0.2rem 0!important}
     hr{margin:0.3rem 0!important}
     .stAppDeployButton, [data-testid="stToolbar"],
-    footer, #MainMenu, .viewerBadge_container__r5tak,
-    [data-testid="manage-app-button"],
-    a[href*="streamlit.io"]{display:none!important}
-    footer:after{content:'© Govardhana Giri General Traders';display:block!important;
-    text-align:center;padding:0.5rem 0;color:#888;font-size:0.85rem}
+    #MainMenu, [data-testid="manage-app-button"],
+    [class*="viewerBadge"], a[href*="streamlit.io"]{display:none!important}
+    footer{visibility:hidden;position:relative}
+    footer:after{content:'© Govardhana Giri General Traders';visibility:visible;
+    display:block;text-align:center;padding:0.5rem 0;color:#888;font-size:0.85rem}
     </style>""", unsafe_allow_html=True)
 
     if "page" not in st.session_state:
